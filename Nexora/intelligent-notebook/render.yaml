@@ -15,9 +15,8 @@ services:
       - key: VITE_API_URL
         value: /api # Points to the same domain
 
-  # Persistent Postgres Database
-  - type: db
-    name: nexora-db
+databases:
+  - name: nexora-db
     databaseName: nexora
     user: nexora_user
     plan: free # Change to paid for production
