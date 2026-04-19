@@ -1,0 +1,23 @@
+services:
+  # Backend and Frontend unified service
+  - type: web
+    name: nexora-app
+    env: python
+    buildCommand: "./render_build.sh"
+    startCommand: "cd Nexora_backend && gunicorn Nexora.wsgi:application"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0 # Or the version you prefer
+      - key: DJANGO_SETTINGS_MODULE
+        value: Nexora.settings
+      - key: DEBUG
+        value: "False"
+      - key: VITE_API_URL
+        value: /api # Points to the same domain
+
+  # Persistent Postgres Database
+  - type: db
+    name: nexora-db
+    databaseName: nexora
+    user: nexora_user
+    plan: free # Change to paid for production
